@@ -4,7 +4,8 @@ const likedPostsId = [];
 const reportedPostsId = [];
 
 const getLikedPosts = () => {
-    return posts.filter((post) => likedPostsId.includes(post.id));
+    const likedPosts = posts.filter((post) => likedPostsId.includes(post.id));
+    return likedPosts;
 };
 
 const getReportedPosts = () => {
@@ -12,7 +13,7 @@ const getReportedPosts = () => {
 };
 
 const isLiked = (id) => {
-    return likedPostsId?.length && !!likedPostsId.includes(id);
+    return likedPostsId.length && likedPostsId.includes(id);
 };
 
 const addToLiked = (id) => {
@@ -95,9 +96,7 @@ const createPost = (post) => {
 
                   <div class="post__indicators"></div>
 
-                  <button class="post__button post__button--align-right" onclick="reportPost(${
-                      post.id
-                  })">
+                  <button class="post__button post__button--align-right" onclick="reportPost(${post.id})">
                     <i class="fa-solid fa-ban"></i>
                   </button>
                 </div>
@@ -143,16 +142,18 @@ const showPosts = (posts) => {
 };
 
 const displayLikedPosts = () => {
-    const likedPosts = getLikedPosts();
-    likedPosts.forEach((post) => {
-        const div = createPost(post);
-        document.getElementById( "liked" ).appendChild(div);
-    });
+  document.getElementById( "liked" ).textContent =''; //line added to display duplicate posts
+  const likedPosts = getLikedPosts();
+  likedPosts.forEach((post) => {
+    const div = createPost(post);
+    document.getElementById( "liked" ).appendChild(div);
+  });
 };
 
 const displayReportedPosts = () => {
+    document.getElementById( "reported" ).textContent=''; //line added to display duplicate posts
     const reportedPosts = getReportedPosts();
-    posts.forEach((post) => {
+    reportedPosts.forEach((post) => {
         const div = createPost(post);
         document.getElementById( "reported" ).appendChild(div);
     });
