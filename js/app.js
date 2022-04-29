@@ -134,10 +134,20 @@ const createPost = (post) => {
 const showPosts = (posts) => {
     const productsContainer = document.getElementById( "posts" );
     productsContainer.innerHTML = "";
-
+    //bug fixed here
     posts.forEach((post) => {
-        const div = createPost(post);
-        productsContainer.appendChild(div);
+        if(reportedPostsId.length){
+          reportedPostsId.forEach(reportPost=>{
+            if(post.id!= reportPost){
+             const div = createPost(post);
+             productsContainer.appendChild(div);
+            }
+         })
+        } else {
+          const div = createPost(post);
+             productsContainer.appendChild(div);
+        }
+        
     });
 };
 
