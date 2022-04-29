@@ -134,21 +134,10 @@ const createPost = (post) => {
 const showPosts = (posts) => {
     const productsContainer = document.getElementById( "posts" );
     productsContainer.innerHTML = "";
-    //bug fixed here
-    posts.forEach((post) => {
-        if(reportedPostsId.length){
-          reportedPostsId.forEach(reportPost=>{
-            if(post.id!= reportPost){
-             const div = createPost(post);
-             productsContainer.appendChild(div);
-            }
-         })
-        } else {
-          const div = createPost(post);
-             productsContainer.appendChild(div);
-        }
-        
-    });
+    posts.forEach(post=>{
+      const div = createPost(post);
+      productsContainer.appendChild(div);
+    })    
 };
 
 const displayLikedPosts = () => {
